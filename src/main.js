@@ -1,30 +1,6 @@
 import { supabase } from './supabase'
 import './style.css'
 
-const authDiv = document.getElementById('auth')
-const appDiv = document.getElementById('app')
-
-document.getElementById('loginBtn').onclick = login
-document.getElementById('addBtn').onclick = addPerson
-
-async function login() {
-  const email = document.getElementById('email').value
-  const password = document.getElementById('password').value
-
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  })
-
-  if (!error) {
-    authDiv.style.display = 'none'
-    appDiv.style.display = 'block'
-    loadPeople()
-  } else {
-    alert(error.message)
-  }
-}
-
 async function addPerson() {
   const first = document.getElementById('first').value
   const last = document.getElementById('last').value
