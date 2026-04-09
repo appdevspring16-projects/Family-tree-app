@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Family Tree</title>
+</head>
+<body>
+  <h1>Family Tree</h1>
+
+  <div id="auth">
+    <input id="email" placeholder="email" />
+    <input id="password" type="password" placeholder="password" />
+    <button id="loginBtn">Login</button>
+  </div>
+
+  <div id="app" style="display:none;">
+    <h2>Add Person</h2>
+    <input id="first" placeholder="First Name" />
+    <input id="last" placeholder="Last Name" />
+    <input type="file" id="photo" />
+    <button id="addBtn">Add</button>
+
+    <h2>People</h2>
+    <ul id="people"></ul>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
