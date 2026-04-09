@@ -18,10 +18,16 @@ async function addPerson() {
       .from('photos')
       .upload(filePath, file)
 
-    if (!error) {
-      photo_url = data.path
-    } else {
+    if (error) {
       console.error("Upload error:", error)
+    } else {
+      // ✅ Generate public URL
+      const { data: publicUrlData } = supabase
+        .storage
+        .from('photos')
+        .getPublicUrl(filePath)
+
+      photo_url = publicUrlData.publicUrl
     }
   }
 
@@ -49,12 +55,19 @@ async function loadPeople() {
 
   data.forEach(p => {
     const li = document.createElement('li')
-    li.innerText = `${p.first_name} ${p.last_name}`
+
+    li.innerHTML = `
+      <div style="margin-bottom: 10px;">
+        <strong>${p.first_name} ${p.last_name}</strong><br/>
+        ${p.photo_url ? `<img src="${p.photo_url}" width="100" />` : ''}
+      </div>
+    `
+
     list.appendChild(li)
   })
 }
 
-// ✅ Load data when page is ready
+// Load on startup
 document.addEventListener('DOMContentLoaded', () => {
   loadPeople()
 })
